@@ -54,13 +54,13 @@ jobs:
         run: |
           cmake -B"build/${{ matrix.platform }}" -DVKB_BUILD_TESTS=ON -DVKB_BUILD_SAMPLES=ON -DGLFW_BUILD_WAYLAND=OFF
           cmake --build "build/${{ matrix.platform }}" --target vulkan_samples --config ${{ matrix.build_type }} ${{ env.PARALLEL }}
-          tar -czvf build.tar.gz build
+          tar -czvf ../build.tar.gz .
 
       - if: ${{ matrix.platform != 'windows-latest' }}
         name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          path: build.tar.gz
+          path: ../build.tar.gz
 
   build_v2:
     name: "Build v2 Components ${{ matrix.platform }} in ${{ matrix.build_type }}"
